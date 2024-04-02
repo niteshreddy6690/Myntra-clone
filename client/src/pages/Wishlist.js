@@ -253,7 +253,7 @@ const Wishlist = () => {
       ) : (
         <Container>
           <Header>{`My Wishlist ${
-            wishlistProducts.length > 0 ? wishlistProducts.length : null
+            wishlistProducts.length > 0 ? wishlistProducts.length : ""
           } items`}</Header>
           <ProductContainer>
             <Ul>

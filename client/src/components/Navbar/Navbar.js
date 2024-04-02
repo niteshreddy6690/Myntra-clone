@@ -117,7 +117,6 @@ const Navbar = () => {
       setSearchDropdownCategory([]);
       setSearchDropdownBrand([]);
     }
-
     return () => {
       clearInterval(handler);
     };
@@ -125,7 +124,7 @@ const Navbar = () => {
 
   const apiCall = async (decoded) => {
     const action = await dispatch(fetchUserById({ id: decoded.id }));
-    if (localStorage.getItem("user")?._id || isFulfilled(action)) {
+    if (isFulfilled(action)) {
       dispatch(fetchCartItems());
     }
   };
@@ -133,6 +132,7 @@ const Navbar = () => {
     const token = LocalStorageService.getAccessToken();
     if (token) {
       var decoded = jwt_decode(token);
+      console.log(decoded);
       if (decoded) {
         if (window.location.pathname !== "/login") {
           apiCall(decoded);

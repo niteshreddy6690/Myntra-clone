@@ -47,7 +47,9 @@ const ErrorResponse = async (error) => {
           refreshToken: LocalStorageService.getRefreshToken(),
         }
       );
-      if (data.AccessToken) {
+
+      console.log("refres data", data);
+      if (data?.AccessToken) {
         window.localStorage.setItem("AccessToken", data.AccessToken);
         // authStore.setToken(data)
         const request = {
@@ -68,6 +70,7 @@ const ErrorResponse = async (error) => {
 
       // : `${window.location.origin}/login`;
       window.location.href = authUrl;
+      localStorage.clear();
       return Promise.reject(error);
     }
   }

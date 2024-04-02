@@ -115,7 +115,7 @@ const verifyOtp = async (req, res) => {
         role: user.role,
       },
       process.env.JWT_ACCESS_SECRET_KEY,
-      { expiresIn: "30d" }
+      { expiresIn: "30m" }
     );
     const RefreshToken = jwt.sign(
       {
@@ -124,7 +124,7 @@ const verifyOtp = async (req, res) => {
         role: user.role,
       },
       process.env.JWT_REFRESH_SECRET_KEY,
-      { expiresIn: "30d" }
+      { expiresIn: "7d" }
     );
     // alternate code to remove the token from the Token Schema
     // const userToken = await Token.findOne({ userId: user.id });
@@ -182,25 +182,26 @@ const refreshToken = catchAsync(async (req, res) => {
   if (!refreshToken)
     return res.status(401).json({ message: "Refresh token required" });
   const token = await Token.findOne({ token: refreshToken });
-  if (!token) return res.status(404).json({ message: "not found in DB" });
+  if (!token) return res.status(404).json({ message: "Token not found" });
   jwt.verify(
     refreshToken,
     process.env.JWT_REFRESH_SECRET_KEY,
     async (err, payload) => {
-      if (err)
-        return res
-          .status(500)
-          .json({ message: "error verifying refresh token" });
-      const AccessToken = jwt.sign(
-        {
-          id: payload.id,
-          email: payload.email,
-          role: payload.role,
-        },
-        process.env.JWT_ACCESS_SECRET_KEY,
-        { expiresIn: "30m" }
-      );
-      res.status(200).json({ AccessToken });
+      if (err) {
+        // console.error("Error verifying refresh token:", err);
+        return res.status(401).json({ message: "Invalid refresh token" });
+      } else {
+        const AccessToken = jwt.sign(
+          {
+            id: payload.id,
+            email: payload.email,
+            role: payload.role,
+          },
+          process.env.JWT_ACCESS_SECRET_KEY,
+          { expiresIn: "30m" }
+        );
+        res.status(200).json({ AccessToken });
+      }
     }
   );
 });

@@ -66,8 +66,7 @@ function App() {
 
   const isAuthenticated =
     currentUser || JSON.parse(localStorage.getItem("user"))?._id;
-
-  console.log(isAuthenticated);
+    
   // console.log("Is authenticated",isAuthenticated);
   // const PrivateRoute = ({ element, path }) => {
   //   return isAuthenticated ? element : <Navigate to="/login" />;

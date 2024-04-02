@@ -1094,7 +1094,9 @@ export default function NewProduct() {
         }, 2000);
         setSelectedImageFiles(imageData);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        console.log(err);
+      });
   };
   const handleClick = async (e) => {
     e.preventDefault();
