@@ -2,6 +2,7 @@ import "./App.css";
 // import "./index.css";
 import Home from "../src/pages/Home";
 import Login from "../src/pages/Login";
+import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 import {
   BrowserRouter as Router,
   Routes,
@@ -66,7 +67,7 @@ function App() {
 
   const isAuthenticated =
     currentUser || JSON.parse(localStorage.getItem("user"))?._id;
-    
+
   // console.log("Is authenticated",isAuthenticated);
   // const PrivateRoute = ({ element, path }) => {
   //   return isAuthenticated ? element : <Navigate to="/login" />;
@@ -94,69 +95,78 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/login"
-            element={isAuthenticated ? <Navigate to="/" /> : <Login />}
-          />
-          <Route path="/shop/:id" element={<Men />} />
-          <Route path="/:id" element={<ListOfProducts />} />
-          <Route path="/:id/:id/:id/:id/buy" element={<ProductDetailsPage />} />
-          <Route
-            path="/accountlink"
-            element={isAuthenticated ? <Navigate to="/" /> : <AccountLink />}
-          />
-          <Route
-            path="/createaccount"
-            element={
-              isAuthenticated?.isExistingUser ? (
-                <Navigate to="/" />
-              ) : (
-                <CreateAccount />
-              )
-            }
-          />
-          .
-          <Route
-            path="/verifyotp"
-            element={isAuthenticated ? <Navigate to="/" /> : <VerifyOtp />}
-          />
-          <Route path="/similar" element={<Similar />} />
-          <Route
-            path="/wishlist"
-            element={isAuthenticated ? <Wishlist /> : <Navigate to="/login" />}
-          />
-          {/* <Route path="/category" element={<Category />} /> */}
-          <Route
-            path="/my/"
-            element={
-              isAuthenticated ? <MyMainPage /> : <Navigate to="/login" />
-            }
-          >
-            <Route path="orders" element={<MyOrders />} />
-            <Route path="dashboard" element={<OverView />} />
-            <Route path="profile/edit" element={<ProfileEdit />} />
-            <Route path="address" element={<MyAddress />} />
-            <Route path="profile" element={<Profile />} />
-          </Route>
-          {/* <Route path="/test1" element={<Test1 />} />
+      <ErrorBoundary>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/login"
+              element={isAuthenticated ? <Navigate to="/" /> : <Login />}
+            />
+            <Route path="/shop/:id" element={<Men />} />
+            <Route path="/:id" element={<ListOfProducts />} />
+            <Route
+              path="/:id/:id/:id/:id/buy"
+              element={<ProductDetailsPage />}
+            />
+            <Route
+              path="/accountlink"
+              element={isAuthenticated ? <Navigate to="/" /> : <AccountLink />}
+            />
+            <Route
+              path="/createaccount"
+              element={
+                isAuthenticated?.isExistingUser ? (
+                  <Navigate to="/" />
+                ) : (
+                  <CreateAccount />
+                )
+              }
+            />
+            .
+            <Route
+              path="/verifyotp"
+              element={isAuthenticated ? <Navigate to="/" /> : <VerifyOtp />}
+            />
+            <Route path="/similar" element={<Similar />} />
+            <Route
+              path="/wishlist"
+              element={
+                isAuthenticated ? <Wishlist /> : <Navigate to="/login" />
+              }
+            />
+            {/* <Route path="/category" element={<Category />} /> */}
+            <Route
+              path="/my/"
+              element={
+                isAuthenticated ? <MyMainPage /> : <Navigate to="/login" />
+              }
+            >
+              <Route path="orders" element={<MyOrders />} />
+              <Route path="dashboard" element={<OverView />} />
+              <Route path="profile/edit" element={<ProfileEdit />} />
+              <Route path="address" element={<MyAddress />} />
+              <Route path="profile" element={<Profile />} />
+            </Route>
+            {/* <Route path="/test1" element={<Test1 />} />
           <Route path="/test3" element={<Test3 />} />
           <Route path="/PreviewImg" element={<PreviewImg />} />
           <Route path="/addimages" element={<Test5 />} />
           <Route path="/radio" element={<Test8 />} />
           <Route path="/toast" element={<Toast />} /> */}
-          <Route
-            path="/checkout/cart"
-            element={isAuthenticated ? <Cart /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/checkout/payment"
-            element={isAuthenticated ? <Checkout /> : <Navigate to="/login" />}
-          />
-        </Routes>
-      </Router>
+            <Route
+              path="/checkout/cart"
+              element={isAuthenticated ? <Cart /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/checkout/payment"
+              element={
+                isAuthenticated ? <Checkout /> : <Navigate to="/login" />
+              }
+            />
+          </Routes>
+        </Router>
+      </ErrorBoundary>
     </div>
   );
 }
