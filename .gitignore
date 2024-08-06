@@ -12,6 +12,8 @@
 /node_modules
 /backend/config/config.env
 
+
+
 # misc
 .env
 .DS_Store
