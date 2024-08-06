@@ -189,11 +189,11 @@ const Navbar = () => {
           </span>
           <span style={{ margin: "0px 5px" }}>
             <Link to="/">
-              <Img
+              {/* <Img
                 src={MyntraLogo}
                 alt="Myntra Logo"
                 style={{ width: "34px", height: "26px" }}
-              />
+              /> */}
             </Link>
           </span>
         </div>
