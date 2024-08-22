@@ -40,33 +40,34 @@ export const menSlider = [
 ];
 
 export const sliders = [
+  // {
+  //   id: "1",
+  //   to: "/shirts?rawQuery=shirts",
+  //   img: `${slide1}`,
+  // },
   {
     id: "1",
-    to: "/shirts?rawQuery=shirts",
-    img: `${slide1}`,
+    to: "/men-casual-shirt",
+    img: `${slide4}`,
   },
   {
     id: "2",
     to: "/women-ethnic-wear",
     img: `${slide2}`,
   },
+
   {
     id: "3",
-    to: "/men-casual-shirt",
-    img: `${slide4}`,
-  },
-  {
-    id: "4",
     to: "/men-tshirts?brand=HRX+by+Hrithik+Roshan",
     img: `${slide5}`,
   },
   {
-    id: "5",
+    id: "4",
     to: "/men-tshirts?brand=WROGN",
     img: `${slide6}`,
   },
   {
-    id: "6",
+    id: "5",
     to: "/women",
     img: `${slide7}`,
   },

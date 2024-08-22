@@ -7,7 +7,7 @@ const axiosInstance = (port) => {
   return axios.create({
     baseURL: isLocal
       ? `http://localhost:${port}/api/`
-      : `https://myntra-clone-a6xl.onrender.com/api/`,
+      : process.env.BACKEND_URL,
     responseType: "json",
   });
 };
@@ -22,7 +22,7 @@ const interceptorsRequest = (domainInstance, port) => {
         /* eslint-disable no-unused-expressions */
         (config.baseURL = isLocal
           ? `http://localhost:${port}/api/`
-          : `https://myntra-clone-a6xl.onrender.com/api/`),
+          : process.env.BACKEND_URL),
           (config.headers.Authorization = `Bearer ${accessToken}`);
         return config;
       }
@@ -66,7 +66,7 @@ const ErrorResponse = async (error) => {
     } catch (e) {
       const authUrl = isLocal
         ? "http://localhost:3000/login"
-        : `https://myntra-clone-by-nitesh.netlify.app/login`;
+        : `${window.location.origin}/login`;
 
       // : `${window.location.origin}/login`;
       window.location.href = authUrl;
