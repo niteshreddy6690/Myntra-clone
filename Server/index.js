@@ -43,6 +43,7 @@ mongoose
   .catch((err) => console.log(err?.message));
 
 app.use(express.json());
+
 app.use("/api/products", productRoute);
 app.use("/api/carts", cartRoutes);
 app.use("/api/auth", authRoutes);
@@ -57,6 +58,10 @@ app.use("/api/order", ordersRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/brand", brantRoutes);
 
-app.listen(process.env.PORT, () => {
-  console.log("server is running on Port :", process.env.PORT);
+app.get("/", (req, res) => {
+  res.send("hello user");
+});
+
+app.listen(process.env.PORT || 8080, () => {
+  console.log("server is running on Port :", process.env.PORT || 8080);
 });

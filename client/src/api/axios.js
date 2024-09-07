@@ -7,7 +7,7 @@ const axiosInstance = (port) => {
   return axios.create({
     baseURL: isLocal
       ? `http://localhost:${port}/api/`
-      : process.env.BACKEND_URL,
+      : `https://myntra-clone-a6xl.onrender.com/api/`,
     responseType: "json",
   });
 };
@@ -22,7 +22,7 @@ const interceptorsRequest = (domainInstance, port) => {
         /* eslint-disable no-unused-expressions */
         (config.baseURL = isLocal
           ? `http://localhost:${port}/api/`
-          : process.env.BACKEND_URL),
+          : `https://myntra-clone-a6xl.onrender.com/api/`),
           (config.headers.Authorization = `Bearer ${accessToken}`);
         return config;
       }
